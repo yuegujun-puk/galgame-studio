@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galgame Studio · 视觉小说制作器</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+<link rel="stylesheet" href="/static/vn.css">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+</head>
+<body>
+
+<!-- ========== 项目库页 ========== -->
+<div id="page-library" class="page">
+  <header class="lib-header">
+    <div class="lib-brand"><i class="ri-gamepad-line"></i> Galgame Studio <span class="lib-sub">视觉小说制作器</span></div>
+    <div class="lib-account" id="lib-account"></div>
+    <button class="btn btn-gold" id="btn-new-project"><i class="ri-add-line"></i> 新建作品</button>
+  </header>
+  <main class="lib-main">
+    <div class="lib-grid" id="project-grid"></div>
+    <div class="lib-empty" id="lib-empty" hidden>
+      <i class="ri-file-list-3-line"></i>
+      <p>还没有作品，点击右上角「新建作品」开始你的 galgame 之旅</p>
+    </div>
+  </main>
+</div>
+
+<!-- ========== 编辑器页 ========== -->
+<div id="page-editor" class="page" hidden>
+  <header class="ed-header">
+    <button class="btn btn-ghost" id="btn-back-lib"><i class="ri-arrow-left-line"></i> 作品库</button>
+    <div class="ed-title-wrap">
+      <input id="ed-title" class="ed-title" maxlength="60" placeholder="作品名">
+      <span class="ed-save-state" id="ed-save-state">已保存</span>
+    </div>
+    <div class="ed-actions">
+      <span class="ed-mode-badge" id="ed-mode-badge" hidden></span>
+      <button class="btn btn-ghost" id="btn-settings"><i class="ri-settings-3-line"></i> 作品设置</button>
+      <button class="btn btn-ghost" id="btn-characters"><i class="ri-user-smile-line"></i> 角色管理</button>
+      <button class="btn btn-ghost" id="btn-export"><i class="ri-download-2-line"></i> 导出</button>
+      <button class="btn btn-gold" id="btn-play"><i class="ri-play-line"></i> 试玩</button>
+      <span id="ed-account"></span>
+    </div>
+  </header>
+
+  <main class="ed-body">
+    <!-- 场景列表 -->
+    <aside class="ed-scenes">
+      <div class="ed-pane-head"><i class="ri-clapperboard-line"></i> 场景
+        <button class="icon-btn" id="btn-add-scene" title="新建场景"><i class="ri-add-line"></i></button>
+      </div>
+      <div class="ed-scene-list" id="scene-list"></div>
+      <div class="ed-scene-tip">开场场景：<b id="ed-start-name">—</b>（点击★切换）</div>
+    </aside>
+
+    <!-- 节点（剧本）编辑 -->
+    <section class="ed-script">
+      <div class="ed-pane-head"><i class="ri-chat-3-line"></i> <span id="ed-scene-title">剧本</span>
+        <span class="ed-pane-spacer"></span>
+        <div class="ed-add-node">
+          <button class="btn btn-small" data-add="dialogue"><i class="ri-chat-quote-line"></i> 台词</button>
+          <button class="btn btn-small" data-add="narration"><i class="ri-book-2-line"></i> 旁白</button>
+          <button class="btn btn-small" data-add="choice"><i class="ri-guide-line"></i> 选项</button>
+          <button class="btn btn-small" data-add="bg"><i class="ri-landscape-line"></i> 背景</button>
+          <button class="btn btn-small" data-add="bgm"><i class="ri-music-2-line"></i> BGM</button>
+          <button class="btn btn-small" data-add="jump"><i class="ri-rocket-line"></i> 跳转</button>
+          <button class="btn btn-small" data-add="end"><i class="ri-flag-line"></i> 结局</button>
+        </div>
+      </div>
+      <div class="ed-node-list" id="node-list"></div>
+    </section>
+  </main>
+</div>
+
+<!-- ========== 试玩 / 播放器覆盖层 ========== -->
+<div id="player-layer" hidden>
+  <div class="vn-stage" id="vn-stage" tabindex="0"></div>
+</div>
+
+<!-- ========== 通用弹窗 ========== -->
+<div id="modal-mask" hidden>
+  <div class="modal" id="modal">
+    <div class="modal-head"><span id="modal-title">标题</span><button class="icon-btn" id="modal-close"><i class="ri-close-line"></i></button></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast-box"></div>
+
+<script src="/static/player.js"></script>
+<script src="/static/editor.js"></script>
+</body>
+</html>
